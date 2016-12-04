@@ -7,7 +7,7 @@ export class Room {
         this.checksum = sectorAndChecksum.substring(sectorAndChecksum.lastIndexOf('[') + 1, sectorAndChecksum.lastIndexOf(']'));
     }
 
-    calculateChecksum(){
+    calculateChecksum() {
         return buildChecksum(charOccurences(this.name));
     }
 
@@ -35,4 +35,20 @@ export function buildChecksum(occurences) {
 
         return b > a ? -1 : 1;
     }).splice(0, 5).join('');
+}
+
+export function rotate(char, nbOfRotation) {
+    const nb = nbOfRotation % 26;
+
+    if (char == '-') return ' ';
+
+    if (char.charCodeAt() + nb <= 'z'.charCodeAt()) {
+        return String.fromCharCode(char.charCodeAt() + nb);
+    }
+
+    return String.fromCharCode(96 + nb - ('z'.charCodeAt() - char.charCodeAt()));
+}
+
+export function rotateName(name, nbOfRotation) {
+    return name.split('').map(c => rotate(c, nbOfRotation)).join('');
 }

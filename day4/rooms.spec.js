@@ -1,6 +1,6 @@
 import {describe, it, beforeEach} from "mocha";
 import {expect} from 'chai';
-import {Room, count, charOccurences, buildChecksum} from './rooms';
+import {Room, count, charOccurences, buildChecksum, rotate, rotateName} from './rooms';
 import {readLines} from './read_input';
 
 describe.only('Day 4', () => {
@@ -43,7 +43,21 @@ describe.only('Day 4', () => {
         });
 
         it('can build the checksum in alphabathic order', () => {
-            expect(buildChecksum({'j': 3, 'y': 1, 'f': 2, 'v': 2, 'n': 2, 'l': 1, 'u': 3, 'p': 3, 'i': 1, 'b': 1, 's': 1, 'z': 2, 'a': 1 })).to.equal('jpufn');
+            expect(buildChecksum({
+                'j': 3,
+                'y': 1,
+                'f': 2,
+                'v': 2,
+                'n': 2,
+                'l': 1,
+                'u': 3,
+                'p': 3,
+                'i': 1,
+                'b': 1,
+                's': 1,
+                'z': 2,
+                'a': 1
+            })).to.equal('jpufn');
         });
 
         it('keeps only 5 char in the checksum', () => {
@@ -64,9 +78,49 @@ describe.only('Day 4', () => {
         });
     });
 
-    it('can solve input', () => {
+    it('can solve input part 1', () => {
         const rooms = readLines().map(l => new Room(l)).filter(r => r.isReal() == true);
         const sectorSum = rooms.map(r => r.sector).reduce((a, b) => a + b, 0);
         expect(sectorSum).to.equal(245102);
+    });
+
+    describe('can rotate letters', () => {
+        it('a becomes b rotated once', () => {
+            expect(rotate('a', 1)).to.equal('b');
+        });
+
+        it('a becomes c rotated twice', () => {
+            expect(rotate('a', 2)).to.equal('c');
+        });
+
+        it('z becomes b rotated twice', () => {
+            expect(rotate('z', 2)).to.equal('b');
+        });
+
+        it('z stays z rotated n*26 times', () => {
+            expect(rotate('z', 10 * 26)).to.equal('z');
+        });
+
+        it('z becomes b rotated 26+26+26+2 times', () => {
+            expect(rotate('z', 26 + 26 + 26 + 2)).to.equal('b');
+        });
+
+        it('- becomes spaces ', () => {
+            const notTakenIntoAccount = 12312;
+            expect(rotate('-', notTakenIntoAccount)).to.equal(' ');
+        });
+    });
+
+    describe('can rotate name', () => {
+        it('works for the given example', () => {
+            expect(rotateName('qzmt-zixmtkozy-ivhz', 343)).to.equal('very encrypted name');
+        });
+    });
+
+
+    it('can solve input part 2', () => {
+        const rooms = readLines().map(l => new Room(l));
+        const norhtPole = rooms.filter(r => rotateName(r.name,r.sector).includes('pole'))[0];
+        expect(norhtPole.sector).to.equal(324);
     });
 });
