@@ -1,18 +1,22 @@
-export function completeCodeOf(instructions) {
-    let currentButton = '5';
-    let code = '';
-    for (let i of instructions) {
-        currentButton = codeOf(currentButton, i);
-        code = code.concat(currentButton);
+export class DecrytpCode {
+    constructor(keypad) {
+        this.keypad = keypad;
     }
-    return code;
-}
-export function codeOf(currentButton, instructions) {
-    return instructions.split('').reduce((number, instruction) => complexKeypad[number][instruction], currentButton);
-}
 
-export function applyInstruction(button, instruction) {
-    return keypad[button][instruction];
+    completeCodeOf(instructions) {
+        let currentButton = '5';
+        let code = '';
+        for (let i of instructions) {
+            currentButton = this.codeOf(currentButton, i);
+            code = code.concat(currentButton);
+        }
+        return code;
+    }
+
+    codeOf(currentButton, instructions) {
+        return instructions.split('').reduce((number, instruction) => this.keypad[number][instruction], currentButton);
+    }
+
 }
 
 export const keypad = {
@@ -27,7 +31,7 @@ export const keypad = {
     '9': {U: '6', D: '9', L: '8', R: '9'}
 };
 
-const complexKeypad = {
+export const complexKeypad = {
     '1': {U: '1', D: '3', L: '1', R: '1'},
     '2': {U: '2', D: '6', L: '2', R: '3'},
     '3': {U: '1', D: '7', L: '2', R: '4'},
