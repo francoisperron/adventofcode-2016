@@ -1,31 +1,45 @@
 import crypto from 'crypto';
 
-export class Password{
-    constructor(hasher){
+export class PasswordDecrypter {
+    constructor(hasher) {
         this.hasher = hasher;
     }
 
-    of(input){
-        let password = '';
+    of(input) {
+        let password = new Password();
         let counter = 0;
-        while(this.incompletePassword(password)){
-            let hash = this.hasher(input+counter);
-            if(isHashValid(hash)) {
-                password +=hash.charAt(5);
-                console.log('Password: ' + password);
+        while (password.isIncomplete()) {
+            let hash = this.hasher(input + counter);
+            if (isHashValid(hash)) {
+                password.setCharAt(hash.charAt(5), hash.charAt(6));
+                console.log('Password: ' + password.getCode());
             }
             counter++;
         }
         return password;
     }
+}
 
-    incompletePassword(password) {
-        return password.length != 8;
+export class Password {
+    constructor() {
+        this.code = new Array(8).fill('');
+    }
+
+    setCharAt(position, char) {
+        if (position <= 8 && this.code[position] == '') this.code[position] = char;
+    }
+
+    isIncomplete() {
+        return !this.code.every(e => e != '');
+    }
+
+    getCode() {
+        return this.code.join('');
     }
 }
 
 export function isHashValid(string) {
-    return string.slice(0,5) == '00000';
+    return string.slice(0, 5) == '00000';
 }
 
 export function md5Hash(string) {
