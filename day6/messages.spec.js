@@ -1,6 +1,6 @@
 import {describe, it} from "mocha";
 import {expect} from 'chai';
-import {parseMessages, mostCommonCharIn} from "./messages";
+import {parseMessages, mostCommonCharIn, leastCommonCharIn} from "./messages";
 import * as assert from "assert";
 import {readLines} from "./read_input";
 
@@ -41,6 +41,12 @@ describe('Day 6', () => {
         });
     });
 
+    describe('Determine the least common char in a string', () => {
+        it('when its obvious', () => {
+            expect(leastCommonCharIn('rraaa')).to.equal('r');
+        });
+    });
+
     describe('can solve day 6 part 1', () => {
         it('dummy input', () => {
             const parsed = parseMessages(dummyInput);
@@ -51,6 +57,20 @@ describe('Day 6', () => {
         it('real input', () => {
             const parsed = parseMessages(readLines());
             const message = parsed.map(m => mostCommonCharIn(m)).join('');
+            expect(message).to.equal('mlncjgdg');
+        });
+    });
+
+    describe('can solve day 6 part 2', () => {
+        it('dummy input', () => {
+            const parsed = parseMessages(dummyInput);
+            const message = parsed.map(m => leastCommonCharIn(m)).join('');
+            expect(message).to.equal('advent');
+        });
+
+        it('real input', () => {
+            const parsed = parseMessages(readLines());
+            const message = parsed.map(m => leastCommonCharIn(m)).join('');
             expect(message).to.equal('mlncjgdg');
         });
     });

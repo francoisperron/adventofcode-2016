@@ -15,3 +15,9 @@ export function mostCommonCharIn(string) {
     string.split('').map(a => {if (a in grouped) grouped[a]++; else grouped[a] = 1; } );
     return Object.keys(grouped).reduce((a,b) => grouped[a] > grouped[b] ? a : b);
 }
+
+export function leastCommonCharIn(string) {
+    const grouped = {};
+    string.split('').map(a => {if (a in grouped) grouped[a]++; else grouped[a] = 1; } );
+    return Object.keys(grouped).reduce((a,b) => grouped[a] < grouped[b] ? a : b);
+}
