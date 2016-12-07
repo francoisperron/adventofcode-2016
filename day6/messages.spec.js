@@ -2,7 +2,7 @@ import {describe, it} from "mocha";
 import {expect} from 'chai';
 import {parseMessages, mostCommonCharIn, leastCommonCharIn} from "./messages";
 import * as assert from "assert";
-import {readLines} from "./read_input";
+import {readLines} from "../read_file";
 
 const dummyInput = [
     'eedadn',
@@ -55,7 +55,7 @@ describe('Day 6', () => {
         });
 
         it('real input', () => {
-            const parsed = parseMessages(readLines());
+            const parsed = parseMessages(readLines('day6/input.data'));
             const message = parsed.map(m => mostCommonCharIn(m)).join('');
             expect(message).to.equal('mlncjgdg');
         });
@@ -69,9 +69,9 @@ describe('Day 6', () => {
         });
 
         it('real input', () => {
-            const parsed = parseMessages(readLines());
+            const parsed = parseMessages(readLines('day6/input.data'));
             const message = parsed.map(m => leastCommonCharIn(m)).join('');
-            expect(message).to.equal('mlncjgdg');
+            expect(message).to.equal('bipjaytb');
         });
     });
 });

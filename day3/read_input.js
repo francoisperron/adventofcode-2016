@@ -1,10 +1,11 @@
 import {readFileSync} from "fs";
+import {readLines} from '../read_file'
 
 export function readInput() {
-    return readLines().map(parseLine);
+    return readLines('day3/input.data').map(parseLine);
 }
 export function readInputVerticaly() {
-    const lines = readLines();
+    const lines = readLines('day3/input.data');
     const triangles = [];
     for (let i = 0; i < lines.length; i = i + 3) {
         const firstLine = parseLine(lines[i]);
@@ -16,10 +17,6 @@ export function readInputVerticaly() {
         triangles.push([firstLine[2], secondLine[2], thirdLine[2]]);
     }
     return triangles;
-}
-
-function readLines() {
-    return readFileSync('day3/input.data').toString().split("\n");
 }
 
 function parseLine(line) {

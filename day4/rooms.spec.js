@@ -1,9 +1,9 @@
 import {describe, it, beforeEach} from "mocha";
 import {expect} from 'chai';
 import {Room, count, charOccurences, buildChecksum, rotate, rotateName} from './rooms';
-import {readLines} from './read_input';
+import {readLines} from '../read_file';
 
-describe.only('Day 4', () => {
+describe('Day 4', () => {
 
     let room;
     beforeEach('', () => {
@@ -79,7 +79,7 @@ describe.only('Day 4', () => {
     });
 
     it('can solve input part 1', () => {
-        const rooms = readLines().map(l => new Room(l)).filter(r => r.isReal() == true);
+        const rooms = readLines('day4/input.data').map(l => new Room(l)).filter(r => r.isReal() == true);
         const sectorSum = rooms.map(r => r.sector).reduce((a, b) => a + b, 0);
         expect(sectorSum).to.equal(245102);
     });
@@ -119,7 +119,7 @@ describe.only('Day 4', () => {
 
 
     it('can solve input part 2', () => {
-        const rooms = readLines().map(l => new Room(l));
+        const rooms = readLines('day4/input.data').map(l => new Room(l));
         const norhtPole = rooms.filter(r => rotateName(r.name,r.sector).includes('pole'))[0];
         expect(norhtPole.sector).to.equal(324);
     });
