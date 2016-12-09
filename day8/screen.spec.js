@@ -32,7 +32,7 @@ describe('Day 8', () => {
             assert.deepEqual(new Screen(2, 2).fill(1, 1).rotateColumn(0, 1).pixels, [['.', '.'], ['#', '.']]);
         });
         it('down by 2, wraps up', () => {
-            assert.deepEqual(new Screen(2, 3).fill(2, 1).rotateColumn(0, 2).pixels, [['#', '.'], ['.', '.'], ['#', '.']]);
+            assert.deepEqual(new Screen(2, 3).fill(1, 2).rotateColumn(0, 2).pixels, [['#', '.'], ['.', '.'], ['#', '.']]);
         });
     });
 
@@ -41,16 +41,16 @@ describe('Day 8', () => {
             assert.deepEqual(new Screen(2, 2).fill(1, 1).rotateRow(0, 1).pixels, [['.', '#'], ['.', '.']]);
         });
         it('down by 2, wraps up', () => {
-            assert.deepEqual(new Screen(3, 2).fill(1, 2).rotateRow(0, 2).pixels, [['#', '.', '#'], ['.', '.', '.']]);
+            assert.deepEqual(new Screen(3, 2).fill(2, 1).rotateRow(0, 2).pixels, [['#', '.', '#'], ['.', '.', '.']]);
         });
     })
 
     describe('Can parse sequences', () => {
         it('rect 1x2', () => {
-            assert.deepEqual(new Screen(2, 2).process(['rect 1x2']).pixels, [['#', '#'], ['.', '.']]);
+            assert.deepEqual(new Screen(2, 2).process(['rect 1x2']).pixels, [['#', '.'], ['#', '.']]);
         });
         it('rotate column x=1 by 1', () => {
-            assert.deepEqual(new Screen(2, 2).process(['rect 1x2', 'rotate column x=1 by 1']).pixels, [['#', '.'], ['.', '#']]);
+            assert.deepEqual(new Screen(2, 2).process(['rect 2x1', 'rotate column x=1 by 1']).pixels, [['#', '.'], ['.', '#']]);
         });
         it('rotate row x=1 by 1', () => {
             assert.deepEqual(new Screen(2, 2).process(['rect 1x1', 'rotate row x=0 by 1']).pixels, [['.', '#'], ['.', '.']]);
