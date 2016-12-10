@@ -1,6 +1,6 @@
 import {describe, it} from 'mocha';
 import {expect} from 'chai';
-import {decompressPart1, decompressPart2} from "./decompress";
+import {decompressPart1, decompressPart2, Marker} from "./decompress";
 import {readLines} from "../read_file";
 
 describe('Day 9', () => {
@@ -25,6 +25,21 @@ describe('Day 9', () => {
         });
         it('of input is 98135', () => {
             expect(decompressPart1(readLines('day9/input.data')[0])).to.equal(98135);
+        });
+    });
+
+    describe('A marker', () => {
+        it('parses marker', () => {
+            expect(new Marker('X(8x2)(3x3)ABCY', 1).marker).to.equal('8x2')
+        });
+        it('computes length based on marker plus the ( )', () => {
+            expect(new Marker('X(8x2)(3x3)ABCY', 1).lenght()).to.equal(5)
+        });
+        it('computes numberOfCharsToRepeat', () => {
+            expect(new Marker('X(8x2)(3x3)ABCY', 1).numberOfCharsToRepeat()).to.equal(8)
+        });
+        it('computes numberOfTimes', () => {
+            expect(new Marker('X(8x2)(3x3)ABCY', 1).numberOfTimes()).to.equal(2)
         });
     });
 

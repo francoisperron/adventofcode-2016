@@ -8,18 +8,14 @@ export function decompressPart2(sequence) {
 
 function decompress(sequence, start, length, part) {
     let size = 0;
-    for (let index = start; index < start + length;) {
+    let index = start;
+    while (index < start + length) {
         if (sequence.charAt(index) == '(') {
-            const marker = new Marker();
-            index++;
-            while (sequence.charAt(index) != ')') {
-                marker.add(sequence.charAt(index));
-                index++;
-            }
-            index++;
-            size += marker.numberOfTimes() * (part == 'recurse' ?
-                decompress(sequence, index, marker.numberOfCharsToRepeat(), 'recurse') :
-                marker.numberOfCharsToRepeat());
+            const marker = new Marker(sequence, index);
+            index += marker.lenght();
+
+            const numberOfCharsToRepeat = part == 'recurse' ? decompress(sequence, index, marker.numberOfCharsToRepeat(), 'recurse') : marker.numberOfCharsToRepeat();
+            size += marker.numberOfTimes() * numberOfCharsToRepeat;
 
             index += marker.numberOfCharsToRepeat();
         }
@@ -32,13 +28,14 @@ function decompress(sequence, start, length, part) {
     return size;
 }
 
-class Marker {
-    constructor() {
-        this.marker = '';
+export class Marker {
+    constructor(sequence, index) {
+        const markerEnd = sequence.slice(index).indexOf(')');
+        this.marker = sequence.slice(index + 1, index + markerEnd);
     }
 
-    add(char) {
-        this.marker += char;
+    lenght() {
+        return this.marker.length + 2;
     }
 
     numberOfCharsToRepeat() {
