@@ -88,7 +88,7 @@ describe('Day 5', () => {
             expect(new PasswordDecrypter(dumyPart2Hash).of(input).getCode()).to.equal('01234567');
         });
 
-        it.skip('real input', () => {
+        it('real input', () => {
             expect(new PasswordDecrypter(md5Hash).of(input).getCode()).to.equal('694190cd');
         });
     });

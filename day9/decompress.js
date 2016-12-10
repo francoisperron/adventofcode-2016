@@ -1,27 +1,51 @@
-export function decompress(sequence) {
-
-    const chars = sequence.slice('');
-    const decompressed = [];
-    let index = 0;
-    while(index < chars.length){
-        const current = chars[index];
-        if(current != '('){
-            console.log('add ' + current);
-            decompressed.push(current);
-            index++;
-        }else {
-            const markerEnd = chars.slice(index).indexOf(')');
-            const marker = chars.slice(index + 1, index + markerEnd + 1);
-            const numberOfChar = parseInt(marker.split('x')[0]);
-            const times = parseInt(marker.split('x')[1]);
-
-            const charsToAdd = chars.slice(index + marker.length + 1, index + marker.length + 1 + numberOfChar).repeat(times);
-            console.log('add ' + charsToAdd);
-            decompressed.push(charsToAdd);
-
-            index += marker.length + numberOfChar + 1;
-        }
-    }
-    return decompressed.reduce((a,b) => a.concat(b));
+export function decompressPart1(sequence) {
+    return decompress(sequence, 0, sequence.length, 'normal');
 }
 
+export function decompressPart2(sequence) {
+    return decompress(sequence, 0, sequence.length, 'recurse');
+}
+
+function decompress(sequence, start, length, part) {
+    let size = 0;
+    for (let index = start; index < start + length;) {
+        if (sequence.charAt(index) == '(') {
+            const marker = new Marker();
+            index++;
+            while (sequence.charAt(index) != ')') {
+                marker.add(sequence.charAt(index));
+                index++;
+            }
+            index++;
+            size += marker.numberOfTimes() * (part == 'recurse' ?
+                decompress(sequence, index, marker.numberOfCharsToRepeat(), 'recurse') :
+                marker.numberOfCharsToRepeat());
+
+            index += marker.numberOfCharsToRepeat();
+        }
+        else {
+            size++;
+            index++;
+        }
+    }
+
+    return size;
+}
+
+class Marker {
+    constructor() {
+        this.marker = '';
+    }
+
+    add(char) {
+        this.marker += char;
+    }
+
+    numberOfCharsToRepeat() {
+        return parseInt(this.marker.split('x')[0]);
+    }
+
+    numberOfTimes() {
+        return parseInt(this.marker.split('x')[1]);
+    }
+}
