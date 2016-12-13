@@ -1,4 +1,3 @@
-import {readFileSync} from "fs";
 import {readLines} from '../read_file'
 
 export function readInput() {
