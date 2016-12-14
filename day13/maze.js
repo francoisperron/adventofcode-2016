@@ -27,20 +27,26 @@ export function isANewPosition(p, visited) {
 export function stepsAt(p, visited) {
     return visited[[p.x, p.y]];
 }
-export function minimumSteps(input, start, stop) {
+export function solve(input, start, stop) {
 
+    let maxPositions;
     let position = start;
     let positionsQueue = [];
     let visited = [];
     addSteps(position, 0, visited);
 
     while (!(position.x == stop.x && position.y == stop.y)) {
-        let positionSteps = stepsAt(position, visited);
+        let positionSteps = stepsAt(position, visited) + 1;
         const positions = possiblePositions(position, input).filter(p => isANewPosition(p, visited));
-        positions.forEach(p => addSteps(p, positionSteps + 1, visited));
+
+        positions.forEach(p => addSteps(p, positionSteps, visited));
         positionsQueue.push(...positions);
         position = positionsQueue.shift();
+
+        if(positionSteps == 50){
+            maxPositions = Object.keys(visited).length;
+        }
     }
 
-    return stepsAt(position, visited);
+    return {minimumSteps: stepsAt(position, visited), maxPositions: maxPositions};
 }

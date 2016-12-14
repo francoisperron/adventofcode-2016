@@ -1,6 +1,6 @@
 import {describe, it} from 'mocha';
 import {expect} from 'chai';
-import {isAnOpenSpace, possiblePositions, minimumSteps, addSteps, isANewPosition, stepsAt} from './maze';
+import {isAnOpenSpace, possiblePositions, solve, addSteps, isANewPosition, stepsAt} from './maze';
 
 const dummyInput = 10;
 
@@ -39,16 +39,22 @@ describe('Day13', () => {
 
     describe('Can solve part 1', () => {
         it('dummy data 1 step', () => {
-            expect(minimumSteps(10, {x: 1, y: 1}, {x: 1, y: 2})).to.equal(1)
+            expect(solve(10, {x: 1, y: 1}, {x: 1, y: 2}).minimumSteps).to.equal(1)
         });
         it('dummy data 2 steps', () => {
-            expect(minimumSteps(10, {x: 1, y: 1}, {x: 2, y: 2})).to.equal(2)
+            expect(solve(10, {x: 1, y: 1}, {x: 2, y: 2}).minimumSteps).to.equal(2)
         });
         it('dummy data 11 steps', () => {
-            expect(minimumSteps(10, {x: 1, y: 1}, {x: 7, y: 4})).to.equal(11)
+            expect(solve(10, {x: 1, y: 1}, {x: 7, y: 4}).minimumSteps).to.equal(11)
         });
-        it('real data 11 steps', () => {
-            expect(minimumSteps(1364, {x: 1, y: 1}, {x: 31, y: 39})).to.equal(86)
+        it('real data 86 steps', () => {
+            expect(solve(1364, {x: 1, y: 1}, {x: 31, y: 39}).minimumSteps).to.equal(86)
+        });
+    });
+
+    describe('Can solve part 2', () => {
+        it('real data max position in 50 steps is 127', () => {
+            expect(solve(1364, {x: 1, y: 1}, {x: 31, y: 39}).maxPositions).to.equal(127)
         });
     });
 });
