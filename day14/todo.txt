@@ -1,6 +1,6 @@
 x generate lowercase hex md5 of salt+index
 
-- determine if a string contains 3 repeating chars
+x determine if a string contains 3 repeating chars
 - place char in array possible keys
 
 - determine if a string contains 5 repeating chars for each char in array possible keys
