@@ -43,5 +43,5 @@ export function isHashValid(string) {
 }
 
 export function md5Hash(string) {
-    return crypto.createHash('md5').update(string).digest('hex')
+    return crypto.createHash('md5').update(string).digest('hex');
 }

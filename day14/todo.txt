@@ -1,0 +1,12 @@
+x generate lowercase hex md5 of salt+index
+
+- determine if a string contains 3 repeating chars
+- place char in array possible keys
+
+- determine if a string contains 5 repeating chars for each char in array possible keys
+-- only check for keys with tries < 1000 && not valid
+- filter out valid keys, mark them as valid
+- increment possible keys tries
+
+- stop when the number of valid keys is 64
+- return the index of the 64th key
