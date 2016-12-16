@@ -1,6 +1,6 @@
 import {describe, it} from 'mocha';
 import {expect} from 'chai';
-import {generateKey, generateKeys, containsTriplet, containsQuintuplet, validKey} from "./one-time-key";
+import {generateKey, generateKeys, containsTriplet, containsQuintuplet, validKey, generateStretchedKey} from "./one-time-key";
 
 const dummyInput = 'abc';
 
@@ -36,6 +36,26 @@ describe('Day 14', () => {
 
             expect(keys.length).to.equal(64);
             expect(keys[63].index).to.equal(23769);
+        });
+    });
+
+    describe('Part 2', () => {
+        it('Generates stretched hash', () => {
+            expect(generateStretchedKey(dummyInput + 0)).to.equal('a107ff634856bb300138cac6568c0f24');
+        });
+        it.skip('Generates 64th valid key at index 22551 for the dummy data', function () {
+            this.timeout(50000);
+            const keys = generateKeys(dummyInput, generateStretchedKey);
+
+            expect(keys[63].index).to.equal(22551);
+            expect(keys[63].key).to.equal('2df6e9378c3c53abed6d3508b6285fff');
+        });
+        it.skip('Real input', function () {
+            this.timeout(50000);
+            const keys = generateKeys('cuanljph', generateStretchedKey);
+
+            expect(keys[63].index).to.equal(20606);
+            expect(keys[63].key).to.equal('ca70c390c37555b819ac0cfb82233a5a');
         });
     });
 });
