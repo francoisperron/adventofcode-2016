@@ -19,7 +19,7 @@ describe('Day 4', () => {
             expect(room.sector).to.equal(123);
         });
 
-        it('the checksum', () => {
+        it('the checksumRound', () => {
             expect(room.checksum).to.equal("abxyz");
         });
     });
@@ -38,11 +38,11 @@ describe('Day 4', () => {
             expect(occurences['x']).to.equal(1);
         });
 
-        it('can build the checksum', () => {
+        it('can build the checksumRound', () => {
             expect(buildChecksum({'z': 1, 'y': 1, 'x': 1, 'b': 3, 'a': 3})).to.equal('abxyz');
         });
 
-        it('can build the checksum in alphabathic order', () => {
+        it('can build the checksumRound in alphabathic order', () => {
             expect(buildChecksum({
                 'j': 3,
                 'y': 1,
@@ -60,7 +60,7 @@ describe('Day 4', () => {
             })).to.equal('jpufn');
         });
 
-        it('keeps only 5 char in the checksum', () => {
+        it('keeps only 5 char in the checksumRound', () => {
             expect(buildChecksum({'a': 1, 'b': 3, 'c': 5, 'd': 9, 'e': 7, 'f': 11, 'g': 13})).to.equal('gfdec');
         });
     });
