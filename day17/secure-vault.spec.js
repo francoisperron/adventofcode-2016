@@ -1,6 +1,6 @@
 import {describe, it} from 'mocha';
 import {expect} from 'chai';
-import {hash, shortestPath, openDoors, moves} from "./secure-vault";
+import {hash, shortestPath, openDoors, moves, longestPath} from "./secure-vault";
 
 describe('Day 17', () => {
     describe('hash', () => {
@@ -29,6 +29,21 @@ describe('Day 17', () => {
         });
         it('my input', () => {
             expect(shortestPath('veumntbg')).to.equal('DDRRULRDRD');
+        });
+    });
+
+    describe('The longest path', () => {
+        it('with ihgpwlah', () => {
+            expect(longestPath('ihgpwlah')).to.equal(370);
+        });
+        it('with kglvqrro', () => {
+            expect(longestPath('kglvqrro')).to.equal(492);
+        });
+        it('with ulqzkmiv', () => {
+            expect(longestPath('ulqzkmiv')).to.equal(830);
+        });
+        it('my input', () => {
+            expect(longestPath('veumntbg')).to.equal(536);
         });
     });
 });

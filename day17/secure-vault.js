@@ -25,10 +25,28 @@ export function shortestPath(passCode) {
     let possibleMoves = [];
     let position = {x: 0, y: 0, path: ''};
     while (!(position.x == 3 && position.y == 3)) {
-        console.log(position);
         let hashCode = hash(passCode + position.path);
         possibleMoves = [...possibleMoves, ...moves(hashCode, position)];
         position = possibleMoves.shift();
     }
     return position.path;
+}
+
+export function longestPath(passCode) {
+
+    let position = {x: 0, y: 0, path: ''};
+    let possibleMoves = [position];
+    let maxPath = 0;
+    while (possibleMoves.length) {
+        position = possibleMoves.shift();
+
+        if (position.x == 3 && position.y == 3) {
+            maxPath = position.path.length > maxPath ? position.path.length : maxPath;
+            continue;
+        }
+
+        let hashCode = hash(passCode + position.path);
+        possibleMoves = [...possibleMoves, ...moves(hashCode, position)];
+    }
+    return maxPath;
 }
