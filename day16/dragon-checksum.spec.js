@@ -50,7 +50,8 @@ describe('Day 16', () => {
     });
 
     describe('Part 2', () => {
-        it.skip('real data', () => {
+        it.skip('real data', function() {
+            this.timeout(500000);
             const curve = dragonCurves('10111011111001111', 35651584);
             const realChecksum = checksum(curve);
 

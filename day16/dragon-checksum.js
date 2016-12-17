@@ -14,6 +14,9 @@ export const checksumRound = (input) => {
         input = input.slice(2, input.length);
     }
     return pairs.map(matches).join('');
+    // works for part 1, but fails for part 2 since tail call recursion is disabled in babel :(
+    // https://babeljs.io/learn-es2015/#ecmascript-2015-features-tail-calls
+    // return input.length != 0 ? checksumRound(input.slice(2, input.length), [...pairs, input.slice(0,2)]) : pairs.map(matches).join('');
 };
 
 export const checksum = (input) => {
