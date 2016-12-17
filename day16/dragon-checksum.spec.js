@@ -2,14 +2,6 @@ import {describe, it} from 'mocha';
 import {expect} from 'chai';
 import {dragonCurve, dragonCurves, matches, checksumRound, checksum} from "./dragon-checksum";
 
-/*
- x calculate dragon curve from input
- x until data >= diskSize + slice at disksize length
- x calculate checksumRound on dragon curve
- x- repeat until checksumRound length si odd
-
- */
-
 describe('Day 16', () => {
     describe('Dragon curve', () => {
         it('calculates from string', () => {
@@ -58,7 +50,7 @@ describe('Day 16', () => {
     });
 
     describe('Part 2', () => {
-        it('real data', () => {
+        it.skip('real data', () => {
             const curve = dragonCurves('10111011111001111', 35651584);
             const realChecksum = checksum(curve);
 
