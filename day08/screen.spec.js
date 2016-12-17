@@ -59,11 +59,11 @@ describe('Day 8', () => {
 
     describe('Day8', () => {
         it('Part 1', () => {
-            const pixels = new Screen(50, 6).process(readLines('day8/input.data')).pixels;
+            const pixels = new Screen(50, 6).process(readLines('day08/input.data')).pixels;
             expect(show(pixels).split('').filter(p => p == '#').length).to.equal(119);
         });
         it('Part 2', () => {
-            const pixels = new Screen(50, 6).process(readLines('day8/input.data')).pixels;
+            const pixels = new Screen(50, 6).process(readLines('day08/input.data')).pixels;
             console.log(show(pixels));
         });
 

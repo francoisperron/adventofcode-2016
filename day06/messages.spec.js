@@ -55,7 +55,7 @@ describe('Day 6', () => {
         });
 
         it('real input', () => {
-            const parsed = parseMessages(readLines('day6/input.data'));
+            const parsed = parseMessages(readLines('day06/input.data'));
             const message = parsed.map(m => mostCommonCharIn(m)).join('');
             expect(message).to.equal('mlncjgdg');
         });
@@ -69,7 +69,7 @@ describe('Day 6', () => {
         });
 
         it('real input', () => {
-            const parsed = parseMessages(readLines('day6/input.data'));
+            const parsed = parseMessages(readLines('day06/input.data'));
             const message = parsed.map(m => leastCommonCharIn(m)).join('');
             expect(message).to.equal('bipjaytb');
         });

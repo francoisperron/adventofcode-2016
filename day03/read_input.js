@@ -1,10 +1,10 @@
 import {readLines} from '../read_file'
 
 export function readInput() {
-    return readLines('day3/input.data').map(parseLine);
+    return readLines('day03/input.data').map(parseLine);
 }
 export function readInputVerticaly() {
-    const lines = readLines('day3/input.data');
+    const lines = readLines('day03/input.data');
     const triangles = [];
     for (let i = 0; i < lines.length; i = i + 3) {
         const firstLine = parseLine(lines[i]);

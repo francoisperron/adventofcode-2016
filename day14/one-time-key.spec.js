@@ -21,7 +21,7 @@ describe('Day 14', () => {
         expect(validKey(dummyInput, 39, 'e')).to.equal(true);
     });
 
-    describe('Part 1', () => {
+    describe.skip('Part 1', () => {
         it('Generates 64th valid key at index 22728 for the dummy data', function () {
             this.timeout(50000);
             const keys = generateKeys(dummyInput);

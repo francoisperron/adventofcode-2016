@@ -70,7 +70,7 @@ describe('Day 12', () => {
 
             expect(registers.a).to.equal(317993)
         });
-        it('real data part 2', function() {
+        it.skip('real data part 2', function() {
             this.timeout(30000);
             const registers = {a: 0, b: 0, c: 1, d: 0, pointer: 0};
             program(readLines('day12/input.data'), registers);

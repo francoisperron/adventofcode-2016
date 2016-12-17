@@ -24,7 +24,7 @@ describe('Day 9', () => {
             expect(decompressPart1('X(8x2)(3x3)ABCY')).to.equal(18);
         });
         it('of input is 98135', () => {
-            expect(decompressPart1(readLines('day9/input.data')[0])).to.equal(98135);
+            expect(decompressPart1(readLines('day09/input.data')[0])).to.equal(98135);
         });
     });
 
@@ -64,7 +64,7 @@ describe('Day 9', () => {
         });
 
         it('of input is 241920', () => {
-            expect(decompressPart2(readLines('day9/input.data')[0])).to.equal(10964557606);
+            expect(decompressPart2(readLines('day09/input.data')[0])).to.equal(10964557606);
         });
     });
 });

@@ -107,7 +107,7 @@ describe('Day 7', () => {
         });
 
         it('real input', () => {
-            expect(addressesSupportingTLS(readLines('day7/input.data'))).to.equal(110);
+            expect(addressesSupportingTLS(readLines('day07/input.data'))).to.equal(110);
         });
     });
 
@@ -118,7 +118,7 @@ describe('Day 7', () => {
         });
 
         it('real input', () => {
-            expect(addressesSupportingSSL(readLines('day7/input.data'))).to.equal(242);
+            expect(addressesSupportingSSL(readLines('day07/input.data'))).to.equal(242);
         });
     });
 });
