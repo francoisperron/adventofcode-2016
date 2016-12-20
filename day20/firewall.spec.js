@@ -1,6 +1,6 @@
 import {describe, it} from "mocha";
 import {expect} from 'chai';
-import {nonBlockedIp, merge, parse, orderAscending, nonBlockedIps} from "./firewall";
+import {parse, orderAscending, nonBlockedIps, ipsIn} from "./firewall";
 import {readLines} from "../read_file";
 
 const dummyInput = ['5-8', '0-2', '4-7'];
@@ -13,29 +13,29 @@ describe('Day 20', () => {
     describe('Finds lowest non-blocked IP', () => {
         it('Dummy input', () => {
             const blackList = parse(dummyInput);
-            expect(nonBlockedIp(blackList)).to.equal(3);
+            expect(nonBlockedIps(blackList)[0]).to.equal(3);
         });
-        it.skip('Real input', () => {
+        it('Real input', () => {
             const blackList = parse(realInput);
-            expect(nonBlockedIp(blackList)).to.equal(4793564);
+            expect(nonBlockedIps(blackList)[0]).to.equal(4793564);
         });
     });
 
     describe('Finds allowed IPs count', () => {
         it('Dummy input', () => {
             const blackList = parse(dummyInput);
-            expect(nonBlockedIps(blackList, dummyInputMax)).to.equal(2);
+            expect(nonBlockedIps(blackList, dummyInputMax).length).to.equal(2);
         });
 
         it('Dummy input without zero', () => {
             const noZeroInput = ['5-8', '4-7'];
             const blackList = parse(noZeroInput);
-            expect(nonBlockedIps(blackList, dummyInputMax)).to.equal(5);
+            expect(nonBlockedIps(blackList, dummyInputMax).length).to.equal(5);
         });
 
         it('Real input', () => {
             const blackList = parse(realInput);
-            expect(nonBlockedIps(blackList, realInputMax)).to.equal(146);
+            expect(nonBlockedIps(blackList, realInputMax).length).to.equal(146);
         });
     });
 
@@ -43,6 +43,7 @@ describe('Day 20', () => {
         it('dummy input', () => {
             expect(parse(dummyInput)).to.deep.equal([[5, 8], [0, 2], [4, 7]]);
         });
+
         it('real input ', () => {
             expect(parse(realInput).length).to.equal(1176);
         });
@@ -50,5 +51,9 @@ describe('Day 20', () => {
 
     it('Order in ascending order the blacklist', () => {
         expect(orderAscending([[5, 8], [0, 2], [4, 7]])).to.deep.equal([[0, 2], [4, 7], [5, 8]])
+    });
+
+    it('builds ips from range', () => {
+        expect(ipsIn(8, 10)).to.deep.equal([9]);
     });
 });
