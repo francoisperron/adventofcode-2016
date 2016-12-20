@@ -12,10 +12,10 @@ export const nonBlockedIps = (blacklist, maxIps) => {
     let lastMaxIp = -1;
     for (let list of blacklist) {
         const minIp = Math.max(0, list[0]);
-        const allowedIps = minIp - lastMaxIp - 1;
-        if (allowedIps > 0) {
-            const ipsAllowed = ipsIn(lastMaxIp, minIp);
-            ips = [...ips, ...ipsAllowed];
+        const nbAllowedIps = minIp - lastMaxIp - 1;
+        if (nbAllowedIps > 0) {
+            const allowedIps = ipsIn(lastMaxIp, minIp);
+            ips = [...ips, ...allowedIps];
         }
         lastMaxIp = Math.max(lastMaxIp, list[1]);
     }
