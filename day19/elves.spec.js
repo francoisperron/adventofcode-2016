@@ -2,7 +2,7 @@ import {describe, it} from 'mocha';
 import {expect} from 'chai';
 import {winnerPart1, josephusPart2} from "./elves";
 
-desciribe('Day 19', () => {
+describe('Day 19', () => {
     describe('The elf with all the gifts', () => {
         it('one elf with a gift won!', () => {
             const elvesCount = 1;
