@@ -1,12 +1,17 @@
 import {describe, it} from 'mocha';
 import {expect} from 'chai';
-import {node, viablePairs} from "./grid-computing";
+import {node, viablePairs, fewestSteps, findPreciousData} from "./grid-computing";
 import {readLines} from "../read_file";
 
 describe('Day 22', () => {
     describe('Parse input', () => {
         it('parse node position, size and used space', () => {
-            expect(node('/dev/grid/node-x0-y0     92T   72T    20T   78%')).to.deep.equal({x: 0, y: 0, size: 92, used: 72 })
+            expect(node('/dev/grid/node-x0-y0     92T   72T    20T   78%')).to.deep.equal({
+                x: 0,
+                y: 0,
+                size: 92,
+                used: 72
+            })
         });
     });
 
@@ -45,11 +50,35 @@ describe('Day 22', () => {
         });
     });
 
-    describe('Part 1', () => {
-        it.skip('real data', function() {
+    describe('Part 1 - number of viable pairs', () => {
+        it.skip('real data', function () {
             this.timeout(5000);
             const nodes = readLines('day22/input.data').map(l => node(l));
             expect(viablePairs(nodes)).to.equal(937);
         });
     });
+
+    describe('Part 2 - fewest number of steps', () => {
+        it('dummy input', () => {
+            const nodes = readLines('day22/dummy.data').map(l => node(l));
+            expect(fewestSteps(nodes)).to.equal(7);
+        });
+    });
+
+    describe('Finds the data', () => {
+        it('when y=0, x=greatest', () => {
+            const nodes = [
+                {x: 0, y: 0, size: 100, used: 0},
+                {x: 2, y: 0, size: 40, used: 0},
+                {x: 1, y: 0, size: 40, used: 40}
+            ];
+            expect(findPreciousData(nodes)).to.deep.equal({x: 2, y: 0, size: 40, used: 0});
+        });
+        it('on real input', () => {
+            const nodes = readLines('day22/input.data').map(l => node(l));
+
+            expect(findPreciousData(nodes)).to.deep.equal({x: 29, y: 0, size: 87, used: 66});
+        });
+    });
+
 });

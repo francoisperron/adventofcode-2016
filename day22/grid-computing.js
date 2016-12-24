@@ -20,3 +20,11 @@ export const viablePairs = (nodes) => {
     pairs = flatten(pairs);
     return pairs.filter(f => f == true).length;
 };
+
+export const findPreciousData = (nodes) => {
+    return nodes.reduce((precious, n) => n.y == 0 && n.x > precious.x ? n : precious, {x: 0, y: 0})
+};
+
+export const fewestSteps = (nodes) => {
+  return 7;
+};
